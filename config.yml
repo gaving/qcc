@@ -1,0 +1,6 @@
+config:
+    uri: "http://localhost:8080/qcbin"
+    username: "user"
+    password: "pass"
+    domain: "domain"
+    project: "project"

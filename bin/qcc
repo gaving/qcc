@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "qcc/version"
+require "qcc/qcc"
+
+QCC.qcc!
