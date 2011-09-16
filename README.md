@@ -2,9 +2,27 @@
 
 ## Installation
 
-`gem install qcc`
+    gem install qcc
 
-# Resources
+## Usage
 
-- http://www.sqaforums.com/showflat.php?Cat=0&Number=675837&Main=675837
-- http://ahamadqtp.blogspot.com/2011_07_31_archive.html
+    Usage: qcc [options]
+
+    List options:
+            --list-all                   All bugs
+            --list-closed                Closed bugs
+            --list-fixed                 Fixed bugs
+            --list-open                  Open bugs
+            --list-reopen                Reopen bugs
+            --list-new                   New bugs
+
+    Action options:
+        -c, --mark-closed [BUG]          Close bug
+        -f, --mark-fixed [BUG]           Fixed bug
+        -n, --mark-new [BUG]             New bug
+        -o, --mark-open [BUG]            Open bug
+
+    Other options:
+        -i, --info [BUG]                 Show info about bug
+        -h, --help                       Show this message
+            --version                    Show version
