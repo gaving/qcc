@@ -2,7 +2,7 @@
 
 ## Installation
 
-`gem install lolcat`
+`gem install qcc`
 
 # Resources
 
