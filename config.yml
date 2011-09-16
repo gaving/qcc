@@ -1,6 +1,6 @@
 config:
-    uri: "http://10.70.100.20:8080/qcbin"
-    username: "gaving"
-    password: "cybaigom"
-    domain: "TEST"
-    project: "Scope_Duty_Management"
+    uri: "http://localhost:8080/qcbin"
+    username: "user"
+    password: "pass"
+    domain: "domain"
+    project: "project"
