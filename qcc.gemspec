@@ -4,7 +4,7 @@ require "qcc/version"
 
 Gem::Specification.new do |s|
   s.name        = "qcc"
-  s.version     = qcc::VERSION
+  s.version     = QCC::VERSION
   s.authors     = ["Gavin"]
   s.email       = ["gavin@brokentrain.net"]
   s.homepage    = "https://github.com/gaving/qcc"

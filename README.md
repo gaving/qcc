@@ -1,5 +1,9 @@
 # Quality Center Controller
 
+## Installation
+
+`gem install lolcat`
+
 # Resources
 
 - http://www.sqaforums.com/showflat.php?Cat=0&Number=675837&Main=675837

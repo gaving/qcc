@@ -1,3 +1,3 @@
 module QCC
-  VERSION = "42.0.99"
+  VERSION = "0.0.1"
 end
