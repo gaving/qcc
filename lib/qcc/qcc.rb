@@ -80,7 +80,7 @@ module QCC
         end
 
         begin
-            file = 'config.yml'
+            file = File.join(File.expand_path('~'), '.qccrc')
             yml = YAML::load(File.open(file))
             qc = WIN32OLE.new('TDApiOle80.TDConnection')
             qc.InitConnectionEx(yml['config']['uri'])
