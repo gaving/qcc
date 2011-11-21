@@ -127,6 +127,17 @@ module QCC
                 %w[BG_DESCRIPTION BG_DEV_COMMENTS].each do |desc|
                     puts value.Field(desc).strip.wrap.blue unless value.Field(desc).nil?
                 end
+                value.Attachments.NewList('').each do |attachment|
+                    #p attachment.Name, attachment.Description
+                    #p attachment.ServerFileName
+                    #p attachment.AttachmentStorage
+                    #p attachment.FileName
+
+                    file = attachment.AttachmentStorage
+                    file.ClientPath = yml['config']['download_directory']
+                    file.Load attachment.Name, true
+                    puts "Saved: %s\r\n".red % attachment.FileName
+                end
             end
         end
 

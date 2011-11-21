@@ -4,3 +4,4 @@ config:
     password: "pass"
     domain: "domain"
     project: "project"
+    download_directory: "C:\\"
