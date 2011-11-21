@@ -52,6 +52,7 @@ module QCC
                 opts.separator " "
                 opts.separator "Other options:"
                 opts.on("-i", "--info [BUG]", "Show info about bug") { |s| options.info = s }
+                opts.on("-d", "--download", "Download the attachments when viewing bug info") { |s| options.download = s }
                 opts.on_tail("-h", "--help", "Show this message") do
                     puts opts
                     exit
@@ -127,16 +128,19 @@ module QCC
                 %w[BG_DESCRIPTION BG_DEV_COMMENTS].each do |desc|
                     puts value.Field(desc).strip.wrap.blue unless value.Field(desc).nil?
                 end
-                value.Attachments.NewList('').each do |attachment|
-                    #p attachment.Name, attachment.Description
-                    #p attachment.ServerFileName
-                    #p attachment.AttachmentStorage
-                    #p attachment.FileName
 
-                    file = attachment.AttachmentStorage
-                    file.ClientPath = yml['config']['download_directory']
-                    file.Load attachment.Name, true
-                    puts "Saved: %s\r\n".red % attachment.FileName
+                if !options.download.nil?
+                    value.Attachments.NewList('').each do |attachment|
+                        #p attachment.Name, attachment.Description
+                        #p attachment.ServerFileName
+                        #p attachment.AttachmentStorage
+                        #p attachment.FileName
+
+                        file = attachment.AttachmentStorage
+                        file.ClientPath = yml['config']['download_directory']
+                        file.Load attachment.Name, true
+                        puts "Saved: %s\r\n".red % attachment.FileName
+                    end
                 end
             end
         end
