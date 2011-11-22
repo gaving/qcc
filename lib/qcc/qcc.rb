@@ -108,9 +108,9 @@ module QCC
             bfi.setproperty('Filter', 'BG_STATUS', status)
 
             defect_table = table do
-                self.headings = 'Id', 'Status', 'Detected By', 'Assigned To', 'Summary'
+                self.headings = 'Id', 'Priority', 'Status', 'Detected By', 'Assigned To', 'Summary'
                 bf.NewList(bfi.Text).each do |value|
-                    add_row [value.Id, value.Status, value.DetectedBy, value.AssignedTo, value.Summary]
+                    add_row [value.Id, value.Priority, value.Status, value.DetectedBy, value.AssignedTo, value.Summary]
                 end
                 align_column 1, :center
             end
@@ -124,6 +124,7 @@ module QCC
                 puts "%s - %s".green % [value.Id, value.Summary]
                 puts "Detected by: %s".yellow % value.DetectedBy
                 puts "Assigned to: %s".yellow % value.AssignedTo
+                puts "Priority: %s".yellow % value.Priority
                 puts "Status: %s\r\n".yellow % value.Status
                 %w[BG_DESCRIPTION BG_DEV_COMMENTS].each do |desc|
                     puts value.Field(desc).strip.wrap.blue unless value.Field(desc).nil?
