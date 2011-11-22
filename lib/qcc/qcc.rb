@@ -159,5 +159,9 @@ module QCC
                 end
             end
         end
+
+        qc.Disconnect
+        qc.Logout
+        qc.ReleaseConnection
     end
 end
