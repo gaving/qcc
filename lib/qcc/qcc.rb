@@ -43,12 +43,14 @@ module QCC
                 opts.on("--list-open", "Open bugs") { |s| options.Open = s }
                 opts.on("--list-reopen", "Reopen bugs") { |s| options.Reopen = s }
                 opts.on("--list-new", "New bugs") { |s| options.New = s }
+                opts.on("--list-rejected", "Rejected bugs") { |s| options.Rejected = s }
                 opts.separator " "
                 opts.separator "Action options:"
                 opts.on("-c", "--mark-closed [BUG]", "Close bug") { |s| options.MClose = s }
                 opts.on("-f", "--mark-fixed [BUG]", "Fixed bug") { |s| options.MFix = s }
                 opts.on("-n", "--mark-new [BUG]", "New bug") { |s| options.MFix = s }
                 opts.on("-o", "--mark-open [BUG]", "Open bug") { |s| options.MOpen = s }
+                opts.on("-r", "--mark-rejected [BUG]", "Reject bug") { |s| options.MReject = s }
                 opts.separator " "
                 opts.separator "Other options:"
                 opts.on("-i", "--info [BUG]", "Show info about bug") { |s| options.info = s }
@@ -71,8 +73,8 @@ module QCC
 
         options = ParseOptions.parse(ARGV)
 
-        has_list = %w[All Closed Fixed Open Reopen New].any?{ |param| !options.send(param).nil? }
-        has_action = %w[MClose MFix MNew MOpen].any?{ |param| !options.send(param).nil? }
+        has_list = %w[All Closed Fixed Open Reopen New Rejected].any?{ |param| !options.send(param).nil? }
+        has_action = %w[MClose MFix MNew MOpen MReject].any?{ |param| !options.send(param).nil? }
         has_info = !options.info.nil?
 
         unless has_list || has_action || has_info
@@ -104,18 +106,22 @@ module QCC
         bfi = bf.Filter
 
         if has_list
-            status = %w[Closed Fixed Open Reopen New].select{ |param| !options.send(param).nil? || !options.send('All').nil? }.join(' Or ')
+            status = %w[Closed Fixed Open Reopen New Rejected].select{ |param| !options.send(param).nil? || !options.send('All').nil? }.join(' Or ')
             bfi.setproperty('Filter', 'BG_STATUS', status)
 
-            defect_table = table do
-                self.headings = 'Id', 'Priority', 'Status', 'Detected By', 'Assigned To', 'Summary'
-                bf.NewList(bfi.Text).each do |value|
-                    add_row [value.Id, value.Priority, value.Status, value.DetectedBy, value.AssignedTo, value.Summary]
+            begin
+                defect_table = table do
+                    self.headings = 'Id', 'Priority', 'Status', 'Detected By', 'Assigned To', 'Summary'
+                    bf.NewList(bfi.Text).each do |value|
+                        add_row [value.Id, value.Priority, value.Status, value.DetectedBy, value.AssignedTo, value.Summary]
+                    end
+                    align_column 1, :center
                 end
-                align_column 1, :center
-            end
 
-            puts defect_table
+                puts defect_table
+            rescue Terminal::Table::Error => e
+                puts "No defects to display".yellow
+            end
         end
 
         if has_info
@@ -147,8 +153,8 @@ module QCC
         end
 
         if has_action
-            statuses = { 'MClose' => 'Closed', 'MFix' => 'Fixed', 'MNew' => 'New', 'MOpen' => 'Open' }
-            %w[MClose MFix MNew MOpen].select{ |param| !options.send(param).nil? }.each do |param|
+            statuses = { 'MClose' => 'Closed', 'MFix' => 'Fixed', 'MNew' => 'New', 'MOpen' => 'Open', 'MReject' => 'Rejected' }
+            %w[MClose MFix MNew MOpen MReject].select{ |param| !options.send(param).nil? }.each do |param|
                 bug_no = options.send(param);
                 status = statuses[param]
                 bfi.setproperty('Filter', 'BG_BUG_ID', bug_no)
