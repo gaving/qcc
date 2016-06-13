@@ -25,7 +25,7 @@
 
 ## Installation
 
-* gem install qcc --local qcc-1.0.0.gem
+* `gem install qcc --local qcc-1.0.0.gem`
 
 ## Usage
 
@@ -58,6 +58,6 @@
 
 ## Developing
 
-* gem install bundler
-* bundle install
-* bundle exec qcc
+* `gem install bundler`
+* `bundle install`
+* `bundle exec qcc`
