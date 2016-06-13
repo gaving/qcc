@@ -54,6 +54,9 @@ module QCC
         opts.separator "Assigned:"
         opts.on("--assigned [USER1,USER2,...]", "Assigned to user") { |s| options.assigned = s }
         opts.separator " "
+        opts.separator "Search:"
+        opts.on("--search [PATTERN]", "Search defect summary for pattern") { |s| options.search = s }
+        opts.separator " "
         opts.separator "Action:"
         opts.on("-c", "--mark-closed [DEFECT]", "Close defect") { |s| options.MClose = s }
         opts.on("-f", "--mark-fixed [DEFECT]", "Fixed defect") { |s| options.MFix = s }
@@ -84,6 +87,7 @@ module QCC
     has_action = %w[MClose MFix MNew MOpen MReject].any?{ |param| !options.send(param).nil? }
     has_info = !options.info.nil?
     has_assigned = !options.assigned.nil?
+    has_search = !options.search.nil?
 
     unless has_list || has_action || has_info
       $stderr.puts "Error: you must specify a --list option, --mark or --info"
@@ -127,6 +131,10 @@ module QCC
 
       if has_assigned
         assigned = options.assigned.split(',')
+      end
+
+      if has_search
+        bfi.setproperty('Filter', 'BG_SUMMARY', "*#{options.search}*")
       end
 
       bfi.setproperty('Filter', 'BG_STATUS', status)

@@ -43,6 +43,9 @@
     Assigned:
             --assigned [USER1,USER2,...] Assigned to user
 
+    Search:
+            --search [PATTERN]           Search defect summary for pattern
+
     Action:
         -c, --mark-closed [DEFECT]       Close defect
         -f, --mark-fixed [DEFECT]        Fixed defect
