@@ -21,11 +21,11 @@
 * QC 11.52
 * Install HP ALM Connectivity Tool (Help -> ALM Tools -> HP ALM Connectivity)
 
-Note a 32-bit version of ruby is required since the OTAClient.dll is a 32-bit dll.
+**Note a 32-bit version of Ruby is required since the OTAClient.dll is a 32-bit dll.**
 
 ## Installation
 
-    * gem install qcc --local qcc-1.0.0.gem
+* gem install qcc --local qcc-1.0.0.gem
 
 ## Usage
 
