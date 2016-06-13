@@ -13,7 +13,7 @@
     | 71  |  2-Essential  | Open     | george      | gaving      | Field abc does not display  |
     | 83  | 3-Significant | Rejected | george      | gaving      | Field abc does not display  |
     | 145 | 3-Significant | Fixed    | george      | gaving      | Field abc does not display  |
-    +-----+---------------+----------+---------------------+-------------+---------------------+
+    +-----+---------------+----------+-------------+-------------+-----------------------------+
 
 ## Requirements
 
